@@ -3,13 +3,16 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.get("/", (req, res) => {
-    res.send("Server läuft");
-});
+const VALID_KEYS = ["KEY123"];
 
 app.get("/getscript", (req, res) => {
+    const key = req.query.key;
 
-    const script = `local Players = game:GetService("Players")
+    if (!VALID_KEYS.includes(key)) {
+        return res.send("INVALID_KEY");
+    }
+
+    res.send(`local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local CoreGui = game:GetService("CoreGui")
 
@@ -4612,9 +4615,7 @@ FanGroup:AddToggle("UFOShurikenStick", {
 		end)
 	end
 })
-`;
-
-    res.send(script);
+`);
 });
 
 app.listen(PORT, () => {
