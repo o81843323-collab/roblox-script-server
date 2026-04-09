@@ -19,7 +19,7 @@ app.get("/getscript", (req, res) => {
         return res.send("INVALID_KEY");
     }
 
-    res.send(`(local Players = game:GetService("Players")
+    res.send(`local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local CoreGui = game:GetService("CoreGui")
 
