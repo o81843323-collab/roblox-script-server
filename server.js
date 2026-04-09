@@ -3,19 +3,12 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-let validKeys = ["KEY123"];
-let blacklist = [];
+const VALID_KEYS = ["KEY123"];
 
 app.get("/getscript", (req, res) => {
     const key = req.query.key;
 
-    if (!key) return res.send("INVALID_KEY");
-
-    if (blacklist.includes(key)) {
-        return res.send("BLACKLISTED");
-    }
-
-    if (!validKeys.includes(key)) {
+    if (!VALID_KEYS.includes(key)) {
         return res.send("INVALID_KEY");
     }
 
@@ -4621,7 +4614,8 @@ FanGroup:AddToggle("UFOShurikenStick", {
 			end
 		end)
 	end
-}));
+})
+`);
 });
 
 app.listen(PORT, () => {
